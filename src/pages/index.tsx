@@ -1,5 +1,5 @@
-const Home = () => {
-  return <div>Home page</div>;
-};
+import { MainPage } from 'src/mainPage/MainPage';
 
-export default Home;
+const Main = () => <MainPage />;
+
+export default Main;
