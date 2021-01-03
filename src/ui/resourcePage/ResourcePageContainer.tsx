@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { fetchPlayers, fetchResourceList } from 'src/api/resources/resources';
+import { fetchResourceList } from 'src/api/resources/resources';
 import { ResourceURL } from 'src/api/resources/resources.types';
 import { useGameDispatch, useGameState } from 'src/game/context/hooks';
+import { fightNewBattle } from 'src/game/fightNewBattle/fightNewBattle';
+
+import { PageTitle } from '../shared';
 
 import { Error } from './error/Error';
 import { ResourcePage } from './ResourcePage';
-import { ResourcePageContainerProps, StatusState } from './ResourcePage.types';
+import { CountState, ResourcePageContainerProps, StatusState } from './ResourcePage.types';
 
 export function ResourcePageContainer<T extends ResourceURL>(props: ResourcePageContainerProps<T>) {
   const [status, setStatus] = useState<StatusState>('idle');
-  const [count, setCount] = useState<number>(props.count);
+  const [count, setCount] = useState<CountState>(props.count);
   const gameDispatch = useGameDispatch();
   const gameState = useGameState();
 
@@ -21,10 +24,13 @@ export function ResourcePageContainer<T extends ResourceURL>(props: ResourcePage
     try {
       setStatus('loading');
 
-      if (!props.count) {
+      let freshCount = count;
+
+      if (!freshCount) {
         try {
           const resourceList = await fetchResourceList(props.resource);
-          setCount(resourceList.count);
+          freshCount = resourceList.count;
+          setCount(freshCount);
         } catch {
           setStatus('error');
           onError();
@@ -32,7 +38,7 @@ export function ResourcePageContainer<T extends ResourceURL>(props: ResourcePage
         }
       }
 
-      const { players, fightResult } = await fetchPlayers(props.resource, props.count || count, props.attribute);
+      const { players, fightResult } = await fightNewBattle(props.resource, freshCount, props.attribute);
 
       gameDispatch({ type: 'BATTLE_FINISHED', payload: { players, fightResult, resource: props.resource } });
       setStatus('success');
@@ -50,19 +56,27 @@ export function ResourcePageContainer<T extends ResourceURL>(props: ResourcePage
 
   const resource = gameState[props.resource];
 
-  if (resource === null) {
-    return <Error onClick={handleRefetch} />;
+  if (!resource) {
+    return (
+      <>
+        <PageTitle title={props.resource} />
+        <Error onClick={handleRefetch} />
+      </>
+    );
   }
 
   return (
-    <ResourcePage
-      refetch={handleRefetch}
-      battleResult={resource.fightResult}
-      leftSidePlayerScore={resource.leftSideWins}
-      rightSidePlayerScore={resource.rightSideWins}
-      leftSidePlayer={resource.players.left}
-      rightSidePlayer={resource.players.right}
-      isLoading={status === 'loading'}
-    />
+    <>
+      <PageTitle title={`${resource.players.left.name} vs ${resource.players.right.name}`} />
+      <ResourcePage
+        refetch={handleRefetch}
+        battleResult={resource.fightResult}
+        leftSidePlayerScore={resource.leftSideWins}
+        rightSidePlayerScore={resource.rightSideWins}
+        leftSidePlayer={resource.players.left}
+        rightSidePlayer={resource.players.right}
+        isLoading={status === 'loading'}
+      />
+    </>
   );
 }

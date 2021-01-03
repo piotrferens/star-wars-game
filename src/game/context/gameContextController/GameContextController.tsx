@@ -22,9 +22,10 @@ export const GameContextController = ({ initialData, children }: GameContextCont
       rightSideWins: fightResult === 'right' ? 1 : 0,
     };
 
-    initState[initialData.resource] = resource;
-
-    return initState;
+    return {
+      ...initState,
+      [initialData.resource]: resource,
+    };
   });
 
   const firstMount = useRef(true);

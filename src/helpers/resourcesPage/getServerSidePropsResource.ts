@@ -1,10 +1,11 @@
-import { fetchPlayers, fetchResourceList } from 'src/api/resources/resources';
+import { fetchResourceList } from 'src/api/resources/resources';
 import { Resource, ResourceURL } from 'src/api/resources/resources.types';
+import { fightNewBattle } from 'src/game/fightNewBattle/fightNewBattle';
 
 export const getServerSidePropsResource = <T extends ResourceURL>(url: T, attribute: keyof Resource<T>) => async () => {
   try {
     const { count } = await fetchResourceList(url);
-    const { players, fightResult } = await fetchPlayers(url, count, attribute);
+    const { players, fightResult } = await fightNewBattle(url, count, attribute);
 
     return {
       props: {

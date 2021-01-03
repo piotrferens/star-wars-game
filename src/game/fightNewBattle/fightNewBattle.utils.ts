@@ -1,4 +1,4 @@
-import { FightResult } from './resources.types';
+import { FightResult } from 'src/api/resources/resources.types';
 
 export const fightBattle = (leftPlayerAttribute: string, rightPlayerAttribute: string): FightResult => {
   const leftPlayerAttributeValue = Number(leftPlayerAttribute);

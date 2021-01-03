@@ -6,6 +6,7 @@ export type Player = {
 };
 
 export type StatusState = 'idle' | 'loading' | 'success' | 'error';
+export type CountState = number | null;
 
 export type ResourcePageProps = {
   leftSidePlayer: Player;
@@ -18,7 +19,7 @@ export type ResourcePageProps = {
 };
 
 export type ResourcePageContainerProps<T extends ResourceURL> = {
-  count: number;
+  count: number | null;
   resource: T;
   attribute: keyof Resource<T>;
 };

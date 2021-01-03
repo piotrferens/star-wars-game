@@ -12,7 +12,7 @@ export const Error = ({ onClick }: ErrorProps) => {
   return (
     <ResourcesLayout>
       <Typography variant="h4" bold color="error" className={classes.title} align="center">
-        Can not find resources
+        Cannot find players
       </Typography>
       <ActionButton onClick={onClick} text="Try again" />
     </ResourcesLayout>

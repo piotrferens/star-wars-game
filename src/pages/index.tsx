@@ -2,7 +2,14 @@ import { getGameLayout } from 'src/game/Layout';
 import { createPage } from 'src/helpers/createPage/createPage';
 import { MainPage } from 'src/ui/mainPage/MainPage';
 
-const Main = createPage(() => <MainPage />);
+import { PageTitle } from '../ui/shared';
+
+const Main = createPage(() => (
+  <>
+    <PageTitle title="Star wars - game" />
+    <MainPage />
+  </>
+));
 
 Main.meta = {
   renderLayout: getGameLayout,
