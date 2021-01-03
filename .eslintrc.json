@@ -16,27 +16,20 @@
     "node": true
   },
   "rules": {
-  "import/order": [
-    "warn",
-    {
-      "newlines-between": "always",
-      "alphabetize": { "order": "asc", "caseInsensitive": true },
-      "groups": [
-        "external",
-        "builtin",
-        "internal",
-        "parent",
-        "sibling",
-        "index"
-      ],
-      "pathGroups": [
-        {
-          "pattern": "src/*",
-          "group": "internal"
-        }
-      ]
-    }
-  ],
+    "import/order": [
+      "warn",
+      {
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc", "caseInsensitive": true },
+        "groups": ["external", "builtin", "internal", "parent", "sibling", "index"],
+        "pathGroups": [
+          {
+            "pattern": "src/*",
+            "group": "internal"
+          }
+        ]
+      }
+    ],
     "@typescript-eslint/explicit-module-boundary-types": 0
   },
   "settings": {

@@ -1,11 +1,22 @@
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider as MaterialThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { FC } from 'react';
 
-import { ThemeProviderProps } from './Theme.types';
+const theme = createMuiTheme({
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        '@global': {
+          a: {
+            textDecoration: 'none',
+          },
+        },
+      },
+    },
+  },
+});
 
-const theme = createMuiTheme();
-
-export const ThemeProvider = ({ children }: ThemeProviderProps) => (
+export const ThemeProvider: FC = ({ children }) => (
   <MaterialThemeProvider theme={theme}>
     <CssBaseline />
     {children}

@@ -1,9 +1,9 @@
 import { Container } from 'src/components';
 
-import { useStyles } from './Layout.styles';
-import { MainPageLayoutProps } from './Layout.types';
+import { useStyles } from './Main.styles';
+import { MainLayoutProps } from './Main.types';
 
-export const MainPageLayout = ({ children }: MainPageLayoutProps) => {
+export const MainLayout = ({ children }: MainLayoutProps) => {
   const classes = useStyles();
 
   return (
