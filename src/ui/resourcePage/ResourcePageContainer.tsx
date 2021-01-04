@@ -18,7 +18,10 @@ export function ResourcePageContainer<T extends ResourceURL>(props: ResourcePage
   const gameDispatch = useGameDispatch();
   const gameState = useGameState();
 
-  const onError = () => toast.error('Something went wrong, looks like swapi.dev is not responding');
+  const onError = () => {
+    setStatus('error');
+    toast.error('Something went wrong, looks like swapi.dev is not responding');
+  };
 
   const handleRefetch = async () => {
     try {
@@ -32,7 +35,6 @@ export function ResourcePageContainer<T extends ResourceURL>(props: ResourcePage
           freshCount = resourceList.count;
           setCount(freshCount);
         } catch {
-          setStatus('error');
           onError();
           return;
         }
@@ -43,7 +45,6 @@ export function ResourcePageContainer<T extends ResourceURL>(props: ResourcePage
       gameDispatch({ type: 'BATTLE_FINISHED', payload: { players, fightResult, resource: props.resource } });
       setStatus('success');
     } catch {
-      setStatus('error');
       onError();
     }
   };
