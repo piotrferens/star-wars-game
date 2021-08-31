@@ -11,6 +11,7 @@ Install all dependencies:
 ```bash
 npm i
 ```
+
 Run app with:
 
 ```bash

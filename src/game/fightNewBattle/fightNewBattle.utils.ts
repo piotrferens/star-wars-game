@@ -1,8 +1,10 @@
 import { FightResult } from 'src/api/resources/resources.types';
 
+export const formatToNumber = (num: string) => Number(num.replace(/,|-/, '.'));
+
 export const fightBattle = (leftPlayerAttribute: string, rightPlayerAttribute: string): FightResult => {
-  const leftPlayerAttributeValue = Number(leftPlayerAttribute);
-  const rightPlayerAttributeValue = Number(rightPlayerAttribute);
+  const leftPlayerAttributeValue = formatToNumber(leftPlayerAttribute);
+  const rightPlayerAttributeValue = formatToNumber(rightPlayerAttribute);
 
   if (leftPlayerAttributeValue > rightPlayerAttributeValue) {
     return 'left';
