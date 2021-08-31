@@ -2,12 +2,13 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "extends": [
+    "next/core-web-vitals",
+    "plugin:@next/next/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
-    "plugin:prettier/recommended",
-    "prettier/@typescript-eslint",
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
   ],
   "env": {
     "es6": true,
@@ -30,7 +31,9 @@
         ]
       }
     ],
-    "@typescript-eslint/explicit-module-boundary-types": 0
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "import/no-named-as-default": 0,
+    "react/display-name": 0
   },
   "settings": {
     "import/resolver": {

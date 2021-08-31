@@ -38,6 +38,7 @@ export const GameContextController = ({ initialData, children }: GameContextCont
     if (initialData) {
       dispatch({ type: 'BATTLE_FINISHED', payload: initialData });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialData]);
 
   return (

@@ -7,7 +7,12 @@ import { personFactory } from 'src/api/resources/resource.mocks';
 import * as resources from 'src/api/resources/resources';
 import PeoplePage from 'src/pages/people';
 
-jest.mock('next/link', () => ({ children }: { children: ReactNode }) => children);
+jest.mock(
+  'next/link',
+  () =>
+    ({ children }: { children: ReactNode }) =>
+      children,
+);
 
 describe('ResourcePage', () => {
   beforeEach(() => {

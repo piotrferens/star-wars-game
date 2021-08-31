@@ -1,9 +1,9 @@
 import { AppProps } from 'next/app';
-import { useEffect } from 'react';
-import NProgress from 'nprogress';
 import Router from 'next/router';
-import Head from 'next/head';
+import NProgress from 'nprogress';
+import { useEffect } from 'react';
 
+import 'public/nprogress.css';
 import { AppProviders } from 'src/AppProviders';
 import { defaultPageMeta } from 'src/helpers/createPage/createPage';
 import { CreatePageComponent } from 'src/helpers/createPage/createPage.types';
@@ -30,14 +30,7 @@ const MyApp = ({ Component, pageProps }: OwnAppProps) => {
     }
   }, []);
 
-  return (
-    <>
-      <Head>
-        <link rel="stylesheet" type="text/css" href="/nprogress.css" />
-      </Head>
-      <AppProviders>{page}</AppProviders>
-    </>
-  );
+  return <AppProviders>{page}</AppProviders>;
 };
 
 export default MyApp;
